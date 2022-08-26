@@ -40,6 +40,10 @@ final public class AWSCognitoAuthPlugin: AuthCategoryPlugin {
     /// Auth configuration used during initialization
     var configuration: JSONValue!
 
+    let maxRetryCount: UInt32
+    let timeoutIntervalForRequest: Double
+    let timeoutIntervalForResource: Double
+    
     /// The unique key of the plugin within the auth category.
     public var key: PluginKey {
         return "awsCognitoAuthPlugin"
@@ -55,6 +59,15 @@ final public class AWSCognitoAuthPlugin: AuthCategoryPlugin {
 
     /// Instantiates an instance of the AWSCognitoAuthPlugin.
     public init() {
+        maxRetryCount = 4
+        timeoutIntervalForRequest = 1
+        timeoutIntervalForResource = 1
+    }
+    
+    public init(maxRetryCount: UInt32, timeoutIntervalForRequest: Double, timeoutIntervalForResource: Double) {
+        self.maxRetryCount = maxRetryCount
+        self.timeoutIntervalForRequest = timeoutIntervalForRequest
+        self.timeoutIntervalForResource = timeoutIntervalForResource
     }
 }
 
