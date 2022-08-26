@@ -69,6 +69,14 @@ extension AWSCognitoAuthPlugin {
         let identityPoolConfig = identityPoolServiceConfiguration(from: authConfiguration)
         let userPoolConfig = try userPoolServiceConfiguration(from: authConfiguration)
 
+        identityPoolConfig?.timeoutIntervalForResource = timeoutIntervalForResource
+        identityPoolConfig?.timeoutIntervalForRequest = timeoutIntervalForRequest
+        identityPoolConfig?.maxRetryCount = maxRetryCount
+        
+        userPoolConfig?.timeoutIntervalForResource = timeoutIntervalForResource
+        userPoolConfig?.timeoutIntervalForRequest = timeoutIntervalForRequest
+        userPoolConfig?.maxRetryCount = maxRetryCount
+        
         // Auth plugin require atleast one of the Cognito service to work. Throw an error if both the service
         // configuration are nil.
         guard identityPoolConfig != nil || userPoolConfig != nil else {
